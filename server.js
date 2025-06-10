@@ -12,7 +12,7 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 const config = {
-  jwtSecret: "thisIsMyReallyInsecureSecret123!", // Used for signing tokens maybe?
+  jwtSecret: process.env.jwtSecret, //changed the hardcoded value//
   appName: "VulnerableApp",
   // Database connection pool setup
   dbPool: new Pool({
