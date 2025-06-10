@@ -3,8 +3,15 @@ const express = require("express");
 module.exports = function (config) {
   const router = express.Router();
 
-  // TODO fix authentication and authorization for admin routes
-
+  // implementing authentication and RBAC
+  const authenticationAdmin = (req,res,next) => {
+  if(!req.user||!req.user.isAdmin)
+  {return res.status(403). send("Forbidden");
+  }
+    next();
+  };
+  router.get("/dashborad", authenticationAdmin, (req, res)=> {...}
+);
   // --- Admin Dashboard ---
   // Provides overview statistics for administrators.
   router.get("/dashboard", (req, res) => {
