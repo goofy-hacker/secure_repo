@@ -14,11 +14,8 @@ module.exports = function (config) {
     }
 
     // Quick search implementation
-    const queryText =
-      "SELECT user_id, username, email FROM users WHERE username LIKE '%" +
-      searchTerm +
-      "%'";
-    console.log(`Executing user search: ${queryText}`); // Debug logging
+    const queryText = " SELECT user_id, username, email FROM users WHERE username LIKE $1";// used parameterized queries//
+   const { rows } = await pool.query(queryText, ['%${searchTerm}%']);
 
     try {
       // Simulate query execution for the challenge
