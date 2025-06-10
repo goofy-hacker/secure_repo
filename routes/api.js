@@ -1,6 +1,5 @@
 const express = require("express");
-const md5 = require("md5");
-
+const bcrypt = require("bcrypt"); // added bcrypt for secure hashing//
 // Route handler function, receives config from server.js
 module.exports = function (config) {
   const router = express.Router();
@@ -44,11 +43,10 @@ module.exports = function (config) {
         .send("Required fields: username, password, email.");
     }
 
-    // Hash password before storing (using md5 for now)
-    const hashedPassword = md5(password);
-    console.log(
-      `Registering user: ${username}, Email: ${email}, Hash: ${hashedPassword}`
-    );
+    // added bcrypt for secure hashing//
+    const saltrounds=10;
+    const hashpassword = await bcrypt.hash(password,saltrounds);
+    console.log('Registered user:$username, Email:$email');
 
     // Simulate database insertion
     // const insertQuery = 'INSERT INTO users(username, password_hash, email) VALUES($1, $2, $3) RETURNING user_id';
