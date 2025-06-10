@@ -63,16 +63,8 @@ app.listen(port, () => {
   console.log(`${config.appName} listening at http://localhost:${port}`);
 
   // Check if critical env vars are loaded
-  if (!process.env.DATABASE_URL || !process.env.API_KEY) {
-    console.warn(
-      "WARN: DATABASE_URL or API_KEY not found in environment variables. Check .env configuration."
-    );
-  } else {
-    console.log(
-      "DB URL Host:",
-      process.env.DATABASE_URL.split("@")[1].split(":")[0]
-    );
-    console.log("API Key Prefix:", process.env.API_KEY.substring(0, 8) + "...");
-  }
-  console.log("Using JWT Secret:", config.jwtSecret);
-});
+  if (!process.env.DATABASE_URL || !process.env.API_KEY) // use environment based logging levels//
+    console.warn("WARN: Missing required environment variables");
+  If (process.env.NODE_ENV!== 'production') {
+    console.log('Configuration loaded);
+                };
